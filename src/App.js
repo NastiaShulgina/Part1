@@ -1,5 +1,13 @@
 import { useState } from 'react'
 
+const Button = ({ name, state, setState }) => {
+  return (
+    <span>
+      <button onClick={() => setState(state + 1)}>{name}</button><span>&nbsp;</span>
+    </span>
+  );
+}
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -29,7 +37,7 @@ const App = () => {
       {
         buttons.map(button => {
           return <span>
-            <button onClick={() => button.setState(button.state + 1)}>{button.name}</button><span>&nbsp;</span>
+            <Button name={button.name} state={button.state} setState={button.setState} onClick={() => button.setState(button.state + 1)} />
           </span>
         })
       }
@@ -37,7 +45,7 @@ const App = () => {
       {
         buttons.map(button => {
           return <div>
-            <p>{button.name}</p>
+            <span>{button.name} &nbsp;</span>
             <span>{button.state}</span>
           </div>
         })
