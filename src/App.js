@@ -23,6 +23,23 @@ const Button = ({ name, state, good, bad, setState, setAverage, all, setAll, set
   );
 }
 
+const Statistics = ({ buttons, all, average, positive }) => {
+  return (
+    <div>
+      {
+        buttons.map(button => {
+          return <div>
+            <span>{button.name} {button.state}</span>
+          </div>
+        })
+      }
+      <div>all {all}</div>
+      <div>average {average}</div>
+      <div>positive {positive} %</div>
+    </div>
+  );
+}
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -60,18 +77,7 @@ const App = () => {
           </span>
         })
       }
-      {
-        buttons.map(button => {
-          return <div>
-            <span>{button.name} {button.state}</span>
-          </div>
-        })
-      }
-      <div>
-        <div>all {all}</div>
-        <div>average {average}</div>
-        <div>positive {positive} %</div>
-      </div>
+      <Statistics buttons={buttons} all={all} average={average} positive={positive} />
     </div>
   )
 }
