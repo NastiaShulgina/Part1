@@ -23,6 +23,12 @@ const Button = ({ name, state, good, bad, setState, setAverage, all, setAll, set
   );
 }
 
+const StatisticLine = ({text, value}) => {
+  return (
+    <div>{text} {value}</div>
+  );
+}
+
 const Statistics = ({ buttons, all, average, positive }) => {
   return (
     <div>
@@ -31,13 +37,13 @@ const Statistics = ({ buttons, all, average, positive }) => {
           {
             buttons.map(button => {
               return <div>
-                <span>{button.name} {button.state}</span>
+                <StatisticLine text={button.name} value={button.state} />
               </div>
             })
           }
-          <div>all {all}</div>
-          <div>average {average}</div>
-          <div>positive {positive} %</div>
+          <StatisticLine text="all" value={all} />
+          <StatisticLine text="average" value={average} />
+          <StatisticLine text="positive" value={`${positive} %`} />
         </div>}
     </div>
   );
