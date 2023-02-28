@@ -14,8 +14,6 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
 
-  Math.floor(Math.random() * 10);
-
   const handleClick = () => {
     setSelected(Math.floor(Math.random() * 8))
   }
