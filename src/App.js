@@ -19,28 +19,39 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [best, setBest] = useState(0)
+  const [votesCount, setVotesCount] = useState(Array(8).fill(0))
 
   const handleNext = () => {
-    console.log("hey");
     setSelected(Math.floor(Math.random() * 8))
   }
-
-  const [votesCount, setVotesCount] = useState(Array(8).fill(0))
-  console.log(votesCount);
 
   const handleVote = () => {
     const updatedVotesCount = [...votesCount]
     updatedVotesCount[selected] += 1
     setVotesCount(updatedVotesCount)
+
+    for (let i = 0; i < updatedVotesCount.length; i++) {
+      const vote = updatedVotesCount[i];
+      if (vote > updatedVotesCount[best]) setBest(i)
+    }
   }
+
+
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
       <p>has {votesCount[selected]} votes</p>
       <div>
         <Button handleClick={handleVote} text="vote" />
         <Button handleClick={handleNext} text="next anecdote" />
+      </div>
+      <h1>Anecdote with the most votes</h1>
+      <div>
+        {anecdotes[best]}
+        <p>has {votesCount[best]} votes</p>
       </div>
     </div>
   )
